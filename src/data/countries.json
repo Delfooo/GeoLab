@@ -1,0 +1,32 @@
+[
+  {
+    "code": "IT",
+    "name": "Italy",
+    "capital": "Rome",
+    "continent": "Europe",
+    "latitude": 41.8719,
+    "longitude": 12.5674,
+    "borders": ["FRA", "AUT", "CHE", "SVN"],
+    "flagEmoji": "🇮🇹"
+  },
+  {
+    "code": "FRA",
+    "name": "France",
+    "capital": "Paris",
+    "continent": "Europe",
+    "latitude": 46.2276,
+    "longitude": 2.2137,
+    "borders": ["BEL", "DEU", "ITA", "LUX", "MCO", "ESP", "CHE", "AND"],
+    "flagEmoji": "🇫🇷"
+  },
+  {
+    "code": "JPN",
+    "name": "Japan",
+    "capital": "Tokyo",
+    "continent": "Asia",
+    "latitude": 36.2048,
+    "longitude": 138.2529,
+    "borders": [],
+    "flagEmoji": "🇯🇵"
+  }
+]
