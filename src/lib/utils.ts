@@ -1,12 +1,18 @@
 import countries from '../../src/data/countries.json';
 import { Country } from '../../src/types/index';
 
-export const getDailyCountry = () => {
+export const getDailyCountry = (): Country => {
   const today = new Date();
-  // Creiamo un numero unico basato sulla data (es. 20260326)
-  const seed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
+  // Il seed cambia ogni 24 ore a mezzanotte
+  const seedString = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
   
-  // Usiamo il seed per scegliere un indice nell'array dei paesi
-  const index = seed % countries.length;
+  // Funzione di hashing semplice per trasformare la stringa in un indice numerico
+  let hash = 0;
+  for (let i = 0; i < seedString.length; i++) {
+    hash = ((hash << 5) - hash) + seedString.charCodeAt(i);
+    hash |= 0; 
+  }
+  
+  const index = Math.abs(hash) % countries.length;
   return countries[index] as Country;
 };

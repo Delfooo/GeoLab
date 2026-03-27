@@ -1,5 +1,7 @@
 // src/lib/geography.ts
 
+import countriesData from '../data/countries.json';
+
 export const getDistance = (lat1: number, lon1: number, lat2: number, lon2: number): number => {
   const R = 6371; // Raggio Terra in km
   const dLat = (lat1 - lat2) * (Math.PI / 180);
@@ -22,4 +24,9 @@ export const getDirection = (lat1: number, lon1: number, lat2: number, lon2: num
   if (angle >= -112.5 && angle < -67.5) return '⬅️ O';
   if (angle >= -67.5 && angle < -22.5) return '↖️ NO';
   return '';
+};
+
+export const getCountryNameByCode = (code: string): string => {
+  const country = countriesData.find(c => c.code === code);
+  return country ? `${country.flagEmoji} ${country.name}` : code;
 };
