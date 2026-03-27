@@ -33,26 +33,28 @@ export default function HomePage() {
           <p className="text-slate-600 italic">Il laboratorio dei piccoli geografi</p>
         </header>
 
+        {/* Game Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {GIOCHI.map((gioco) => (
             <div 
               key={gioco.id}
-              className={`p-6 rounded-2xl shadow-sm border border-slate-200 bg-white flex flex-col justify-between transition-transform hover:scale-105 ${!gioco.available && 'opacity-60'}`}
+              className={`glass-card p-6 rounded-2xl shadow-sm border border-slate-200 bg-white flex flex-col justify-between transition-transform hover:scale-105 ${!gioco.available && 'opacity-60'}`}
             >
               <div>
                 <h2 className="text-xl font-bold mb-2">{gioco.title}</h2>
                 <p className="text-slate-500 text-sm mb-4">{gioco.description}</p>
               </div>
               
+              {/* Apply the btn-gold class to the playable game buttons for a premium feel */}
               {gioco.available ? (
                 <Link 
                   href={`/${gioco.id}`}
-                  className={`w-full py-2 px-4 rounded-lg text-white font-semibold text-center ${gioco.color} hover:brightness-90`}
+                  className={`w-full py-2 px-4 rounded-lg text-white font-semibold text-center ${gioco.color} hover:brightness-90 btn-gold`}
                 >
                   Gioca Ora
                 </Link>
               ) : (
-                <button disabled className="w-full py-2 px-4 rounded-lg bg-slate-200 text-slate-500 font-semibold cursor-not-allowed">
+                <button disabled className="w-full py-2 px-4 rounded-lg bg-slate-200 text-slate-500 font-semibold cursor-not-allowed btn-gold">
                   In Arrivo...
                 </button>
               )}

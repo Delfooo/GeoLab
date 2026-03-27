@@ -1,0 +1,58 @@
+/* Globals.css */
+/* Stili globali per la pagina */
+
+@import "tailwindcss";
+
+@theme {
+  /* Definiamo i colori direttamente nel tema di Tailwind v4 */
+  --color-gold-100: #FDF2D0;
+  --color-gold-400: #FACC15;
+  --color-gold-500: #EAB308;
+  --color-gold-600: #CA8A04;
+  --color-gold-default: #FFD700;
+
+  --color-dark-900: #0A0A0A;
+  --color-dark-800: #171717;
+  --color-dark-700: #262626;
+
+  --background-image-gold-gradient: linear-gradient(135deg, #FDE68A 0%, #EAB308 50%, #B45309 100%);
+}
+
+:root {
+  --background: #0A0A0A;
+  --foreground: #FDF2D0;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  /* Un tocco di classe: un leggero gradiente radiale scuro */
+  background-image: 
+    radial-gradient(circle at 50% -20%, #3e3e00 0%, transparent 50%);
+  min-height: 100vh;
+  margin: 0;
+}
+
+/* Classi di utilità personalizzate */
+@utility glass-card {
+  background: rgba(23, 23, 23, 0.8);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(234, 179, 8, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
+}
+
+@utility btn-gold {
+  background-color: var(--color-gold-500);
+  color: var(--color-dark-900);
+  font-weight: 900;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  
+  &:hover {
+    background-color: var(--color-gold-400);
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(234, 179, 8, 0.5);
+  }
+}
