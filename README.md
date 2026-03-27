@@ -60,3 +60,6 @@ Avvia il server di sviluppo:
     
 Visualizza l'app:
 Apri il browser all'indirizzo http://localhost:3000.
+
+Per popolare il file JSON (countries.json):
+    node seed-countries.mjs
