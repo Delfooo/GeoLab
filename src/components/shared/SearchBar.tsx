@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import countriesData from '../../../src/data/countries.json';
 import { Country } from '../../../src/types/index';
 import { Search } from 'lucide-react';
+import { getAllCountries } from '../../lib/api';
 
 interface SearchBarProps {
   onSelect: (country: Country) => void;
@@ -15,6 +16,7 @@ export default function SearchBar({ onSelect, disabled }: SearchBarProps) {
   const [results, setResults] = useState<Country[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
+  const [allCountries, setAllCountries] = useState<Country[]>([]);
 
   // Chiudi la tendina se clicchi fuori
   useEffect(() => {
@@ -30,17 +32,17 @@ export default function SearchBar({ onSelect, disabled }: SearchBarProps) {
   // Logica di filtraggio
   useEffect(() => {
     if (query.length > 1) {
-      const filtered = countriesData.filter((c) =>
-        c.name.toLowerCase().includes(query.toLowerCase()) ||
-        c.capital.toLowerCase().includes(query.toLowerCase())
-      ).slice(0, 5); // Mostriamo solo i primi 5 risultati
+      const filtered = allCountries.filter((c) =>
+        c.name.toLowerCase().includes(query.toLowerCase())
+      ).slice(0, 5);
       setResults(filtered);
       setIsOpen(true);
-    } else {
-      setResults([]);
-      setIsOpen(false);
     }
-  }, [query]);
+  }, [query, allCountries]);
+
+  useEffect(() => {
+    getAllCountries().then(setAllCountries);
+  }, []);
 
   return (
     <div ref={wrapperRef} className="relative w-full max-w-md mx-auto">
