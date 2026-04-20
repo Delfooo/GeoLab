@@ -1,18 +1,21 @@
-import countries from '../../src/data/countries.json';
-import { Country } from '../../src/types/index';
+import { getAllCountries } from './api';
+import { Country } from '../types';
 
-export const getDailyCountry = (): Country => {
-  const today = new Date();
-  // Il seed cambia ogni 24 ore a mezzanotte
-  const seedString = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
-  
-  // Funzione di hashing semplice per trasformare la stringa in un indice numerico
-  let hash = 0;
-  for (let i = 0; i < seedString.length; i++) {
-    hash = ((hash << 5) - hash) + seedString.charCodeAt(i);
-    hash |= 0; 
+export async function getDailyCountry(): Promise<Country | null> {
+  try {
+    const countries = await getAllCountries();
+    if (countries.length === 0) return null;
+
+    const today = new Date();
+    const seed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
+    
+    // Filtriamo i paesi "reali" (escludendo micro-isole se vuoi un gioco più semplice)
+    const filtered = countries.filter(c => c.latitude && c.longitude);
+    
+    const index = seed % filtered.length;
+    return filtered[index];
+  } catch (error) {
+    console.error('Error fetching daily country:', error);
+    return null;
   }
-  
-  const index = Math.abs(hash) % countries.length;
-  return countries[index] as Country;
-};
+}

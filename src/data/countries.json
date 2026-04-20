@@ -7,7 +7,8 @@
     "latitude": 41.8719,
     "longitude": 12.5674,
     "borders": ["FRA", "AUT", "CHE", "SVN"],
-    "flagEmoji": "🇮🇹"
+    "flagEmoji": "🇮🇹",
+    "colors": ["green", "white", "red"]
   },
   {
     "code": "FRA",
@@ -17,7 +18,8 @@
     "latitude": 46.2276,
     "longitude": 2.2137,
     "borders": ["BEL", "DEU", "ITA", "LUX", "MCO", "ESP", "CHE", "AND"],
-    "flagEmoji": "🇫🇷"
+    "flagEmoji": "🇫🇷",
+    "colors": ["blue", "white", "red"]
   },
   {
     "code": "JPN",
@@ -27,6 +29,7 @@
     "latitude": 36.2048,
     "longitude": 138.2529,
     "borders": [],
-    "flagEmoji": "🇯🇵"
+    "flagEmoji": "🇯🇵",
+    "colors": ["white", "red"]
   }
 ]

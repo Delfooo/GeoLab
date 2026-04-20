@@ -6,12 +6,13 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "clean": "rd /s /q .next && npm run dev" 
+    "clean": "rd /s /q .next && npm run dev"
   },
   "dependencies": {
     "autoprefixer": "^10.4.27",
     "clsx": "^2.1.1",
-    "lucide-react": "^1.7.0",
+    "framer-motion": "^12.38.0",
+    "lucide-react": "^1.8.0",
     "next": "16.2.1",
     "postcss": "^8.5.8",
     "react": "19.2.4",

@@ -10,6 +10,7 @@ export interface Country {
   borders: string[];
   flagEmoji: string;
   population: number;
+  colors: string[];
 }
 
 export type GameStatus = 'playing' | 'won' | 'lost';
