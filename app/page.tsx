@@ -1,64 +1,71 @@
+'use client';
+
 import Link from 'next/link';
+import { WorldMap } from "../src/components/ui/world-map";
+import { motion } from "framer-motion";
 
 const GIOCHI = [
-  {
-    id: 'flagle',
-    title: '🚩 Flagle',
-    description: 'Indovina la bandiera nel minor numero di tentativi.',
-    color: 'bg-blue-500',
-    available: true,
-  },
-  {
-    id: 'capitalle',
-    title: '🏛️ Capitalle',
-    description: 'Trova lo stato partendo dalla sua capitale.',
-    color: 'bg-green-500',
-    available: false, // Lo attiveremo dopo
-  },
-  {
-    id: 'borderle',
-    title: '🗺️ Borderle',
-    description: 'Riconosci lo stato dai suoi confini.',
-    color: 'bg-purple-500',
-    available: false,
-  },
+  { id: 'flagle', title: '🚩 Flagle', description: 'Indovina la bandiera.', available: true },
+  { id: 'capitalle', title: '🏛️ Capitalle', description: 'Trova lo stato dalla capitale.', available: false },
+  { id: 'borderle', title: '🗺️ Borderle', description: 'Riconosci i confini.', available: false },
+  { id: 'coastline', title: '🏝️ Coastline', description: 'Riconosci la forma.', available: true },
 ];
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen bg-slate-50 p-8">
-      <div className="max-w-4xl mx-auto">
-        <header className="text-center mb-12">
-          <h1 className="text-4xl font-extrabold text-slate-900 mb-2">GeoLab</h1>
-          <p className="text-slate-600 italic">Il laboratorio dei piccoli geografi</p>
+    <main className="relative min-h-screen w-full flex flex-col items-center justify-center overflow-hidden bg-dark-900">
+      
+      {/* BACKGROUND LAYER: Mappa del mondo a tutto schermo */}
+      <div className="fixed inset-0 z-0 pointer-events-none">
+        <WorldMap lineColor="#EAB308" />
+        {/* Overlay scuro per leggibilità */}
+        <div className="absolute inset-0 bg-black/40" />
+      </div>
+
+      {/* CONTENT LAYER: UI centrale */}
+      <div className="relative z-10 w-full max-w-6xl px-8 py-20 flex flex-col items-center">
+        <header className="text-center mb-16 space-y-4">
+          <motion.h1 
+            initial={{ y: -20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            className="text-8xl md:text-9xl font-black tracking-tighter text-transparent bg-clip-text bg-gold-gradient"
+          >
+            GEOLAB
+          </motion.h1>
+          <p className="text-gold-500 font-medium tracking-[0.5em] uppercase text-sm">
+            oltre i confini
+          </p>
         </header>
 
-        {/* Game Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {GIOCHI.map((gioco) => (
-            <div 
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full">
+          {GIOCHI.map((gioco, idx) => (
+            <motion.div 
               key={gioco.id}
-              className={`glass-card p-6 rounded-2xl shadow-sm border border-slate-200 bg-white flex flex-col justify-between transition-transform hover:scale-105 ${!gioco.available && 'opacity-60'}`}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: idx * 0.15 }}
+              className="glass-card p-10 rounded-[2rem] group relative overflow-hidden text-center flex flex-col"
             >
-              <div>
-                <h2 className="text-xl font-bold mb-2">{gioco.title}</h2>
-                <p className="text-slate-500 text-sm mb-4">{gioco.description}</p>
-              </div>
+              <h2 className="text-3xl font-bold text-white mb-4">{gioco.title}</h2>
+              <p className="text-gold-100/60 text-base mb-8 flex-grow">{gioco.description}</p>
               
-              {/* Apply the btn-gold class to the playable game buttons for a premium feel */}
               {gioco.available ? (
+                /* Un unico Link dinamico per ogni gioco */
                 <Link 
-                  href={`/${gioco.id}`}
-                  className={`w-full py-2 px-4 rounded-lg text-white font-semibold text-center ${gioco.color} hover:brightness-90 btn-gold`}
+                  href={gioco.id === 'flagle' ? '/flagle/game' : 
+                    gioco.id === 'borderle' ? '/borderle' : 
+                    gioco.id === 'capitalle' ? '/capitalle' : 
+                    gioco.id === 'coastline' ? '/coastline' : `/${gioco.id}`} 
+                  className="btn-gold w-full block py-4 text-lg"
                 >
-                  Gioca Ora
+                  INIZIA SFIDA
                 </Link>
               ) : (
-                <button disabled className="w-full py-2 px-4 rounded-lg bg-slate-200 text-slate-500 font-semibold cursor-not-allowed btn-gold">
-                  In Arrivo...
-                </button>
+                <div className="py-4 px-4 rounded-xl bg-white/5 border border-white/10 text-white/20 font-bold">
+                  PROSSIMAMENTE
+                </div>
               )}
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

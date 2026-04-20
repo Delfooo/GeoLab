@@ -1,15 +1,23 @@
 // Layout.tsx
-// Layout principale per la pagina
+// Layout principale per la pagina GeoLab
 
 import type { Metadata } from "next";
-import { Inter } from "next/font/google"; // Importa Inter da Google Fonts API
+import { Inter } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "GeoLab - Il laboratorio dei piccoli geografi",
-  description: "Sfide geografiche quotidiane, bandiere, confini e capitali.",
+  title: "GeoLab - oltre i confini",
+  description: "Sfide geografiche quotidiane.",
+  keywords: "geografia, giochi, bandiere, confini, capitali",
+  robots: "index, follow",
+  viewport: "width=device-width, initial-scale=1.0",
+  icons: {
+    icon: [{
+      url: "/favicon.ico",
+    }],
+  },
 };
 
 export default function RootLayout({
@@ -19,19 +27,18 @@ export default function RootLayout({
 }) {
   return (
     <html lang="it">
-      <body className={inter.className}>
-        {/* Qui puoi aggiungere una Navbar comune a tutte le pagine */}
-        <nav className="p-4 bg-white border-b border-slate-200 shadow-sm">
-          <div className="max-w-4xl mx-auto flex justify-between items-center">
-            <a href="/" className="text-xl font-black text-slate-900 tracking-tighter">
+      <body className={`${inter.className} bg-dark-900`}>
+        {/* Navbar Trasparente e Assoluta per non occupare spazio fisico */}
+        <nav className="absolute top-0 left-0 w-full z-50 p-6">
+          <div className="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="/" className="text-2xl font-black text-gold-500 tracking-tighter">
               🌍 GEOLAB
             </a>
           </div>
         </nav>
 
-        <main className="max-w-4xl mx-auto p-4">
-          {children}
-        </main>
+        {/* Rimosso main con max-width per permettere lo sfondo full-screen */}
+        {children}
       </body>
     </html>
   );
