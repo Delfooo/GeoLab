@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 
 const GIOCHI = [
   { id: 'flagle', title: '🚩 Flagle', description: 'Indovina la bandiera.', available: true },
-  { id: 'capitalle', title: '🏛️ Capitalle', description: 'Trova lo stato dalla capitale.', available: false },
+  { id: 'capitale', title: '🏛️ Capitale', description: 'Trova lo stato dalla capitale.', available: false },
   { id: 'borderle', title: '🗺️ Borderle', description: 'Riconosci i confini.', available: false },
   { id: 'coastline', title: '🏝️ Coastline', description: 'Riconosci la forma.', available: true },
 ];
