@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
-import countriesData from '../../../src/data/countries.json';
 import { Country } from '../../../src/types/index';
 import { Search } from 'lucide-react';
 import { getAllCountries } from '../../lib/api';

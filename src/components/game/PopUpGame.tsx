@@ -2,14 +2,31 @@
 import { useState, useEffect } from 'react';
 import { Country } from '../../types';
 import { usePopUpStore } from '../../store/usePopUpStore';
-import countriesData from '../../data/countries.json';
+import { fetchCountries } from '../../lib/game-logic';
 
 export default function PopUpGame() {
   const { score, updateScore } = usePopUpStore();
-  const [leftCountry, setLeftCountry] = useState<Country>(countriesData[0]);
-  const [rightCountry, setRightCountry] = useState<Country>(countriesData[1]);
+  const [countries, setCountries] = useState<Country[]>([]);
+  const [leftCountry, setLeftCountry] = useState<Country | null>(null);
+  const [rightCountry, setRightCountry] = useState<Country | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadData = async () => {
+      const data = await fetchCountries();
+      if (data.length >= 2) {
+        setCountries(data);
+        setLeftCountry(data[Math.floor(Math.random() * data.length)]);
+        setRightCountry(data[Math.floor(Math.random() * data.length)]);
+      }
+      setLoading(false);
+    };
+    loadData();
+  }, []);
 
   const handleGuess = (higher: boolean) => {
+    if (!leftCountry || !rightCountry || countries.length === 0) return;
+
     const isCorrect = higher 
       ? rightCountry.population >= leftCountry.population 
       : rightCountry.population <= leftCountry.population;
@@ -18,12 +35,17 @@ export default function PopUpGame() {
       updateScore(true);
       // Il paese di destra diventa quello di sinistra, ne carichiamo uno nuovo a destra
       setLeftCountry(rightCountry);
-      setRightCountry(countriesData[Math.floor(Math.random() * countriesData.length)]);
+      const filtered = countries.filter(c => c.code !== rightCountry.code);
+      setRightCountry(filtered[Math.floor(Math.random() * filtered.length)]);
     } else {
       updateScore(false);
       alert(`Hai perso! Punteggio finale: ${score}`);
     }
   };
+
+  if (loading || !leftCountry || !rightCountry) {
+    return <div className="h-[70vh] flex items-center justify-center text-gold-500 font-bold uppercase">Caricamento PopUp Game...</div>;
+  }
 
   return (
     <div className="flex flex-col md:flex-row h-[70vh] gap-4 p-4">

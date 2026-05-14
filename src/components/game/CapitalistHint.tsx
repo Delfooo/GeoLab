@@ -3,8 +3,8 @@ import { getDistance, getDirection } from '../../lib/geography';
 import { Country } from '../../types';
 
 export function CapitalistHint({ guess, target }: { guess: Country, target: Country }) {
-  const dist = getDistance(guess.latitude, guess.longitude, target.latitude, target.longitude);
-  const dir = getDirection(guess.latitude, guess.longitude, target.latitude, target.longitude);
+  const dist = getDistance(guess.latlng[0], guess.latlng[1], target.latlng[0], target.latlng[1]);
+  const dir = getDirection(guess.latlng[0], guess.latlng[1], target.latlng[0], target.latlng[1]);
 
   return (
     <div className="flex justify-between items-center p-3 bg-white rounded-lg border border-slate-200 mb-2 animate-in slide-in-from-left">

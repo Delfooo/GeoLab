@@ -10,17 +10,16 @@ export async function getAllCountries(): Promise<Country[]> {
     const data = await response.json();
 
     return data.map((c: any) => ({
+      id: c.cca2,
       code: c.cca2,
       name: c.name.common,
       capital: c.capital?.[0] || 'N/A',
-      continent: c.continents?.[0] || 'Unknown',
-      latitude: c.latlng[0],
-      longitude: c.latlng[1],
+      region: c.region || c.continents?.[0] || 'Unknown',
+      population: c.population || 0,
+      latlng: c.latlng || [0, 0],
       borders: c.borders || [],
-      flagEmoji: c.flag || '🏳️', // Alcune API non danno l'emoji, usiamo un fallback
-      // Logica colori semplificata: l'API non dà i colori esatti delle bandiere.
-      // Per Flagle, potremmo dover mantenere un piccolo mapping o dedurli.
-      colors: getColorsByContinent(c.continents?.[0]) // Placeholder per ora
+      flagEmoji: c.flag || '🏳️', 
+      colors: getColorsByContinent(c.continents?.[0]) 
     }));
   } catch (error) {
     console.error(error);

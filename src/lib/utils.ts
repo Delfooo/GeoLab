@@ -10,7 +10,7 @@ export async function getDailyCountry(): Promise<Country | null> {
     const seed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
     
     // Filtriamo i paesi "reali" (escludendo micro-isole se vuoi un gioco più semplice)
-    const filtered = countries.filter(c => c.latitude && c.longitude);
+    const filtered = countries.filter(c => c.latlng && c.latlng.length === 2);
     
     const index = seed % filtered.length;
     return filtered[index];
