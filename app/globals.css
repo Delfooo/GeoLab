@@ -26,9 +26,6 @@
 body {
   background-color: var(--background);
   color: var(--foreground);
-  /* Un tocco di classe: un leggero gradiente radiale scuro */
-  background-image: 
-    radial-gradient(circle at 50% -20%, #3e3e00 0%, transparent 50%);
   min-height: 100vh;
   margin: 0;
 }
@@ -55,4 +52,8 @@ body {
     transform: scale(1.05);
     box-shadow: 0 0 20px rgba(234, 179, 8, 0.5);
   }
+}
+
+@utility bg-radial-dark {
+  background-image: radial-gradient(circle at center, transparent 0%, rgba(10, 10, 10, 0.4) 40%, #0A0A0A 100%);
 }

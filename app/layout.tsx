@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   viewport: "width=device-width, initial-scale=1.0",
   icons: {
     icon: [{
-      url: "/favicon.ico",
+      url: "/icona_mondo_negativo.ico",
     }],
   },
 };
